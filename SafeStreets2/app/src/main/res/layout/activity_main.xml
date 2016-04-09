@@ -9,12 +9,78 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.mad.mark.safestreets2.MainActivity">
 
-    <TextView
+    <TextView android:id="@+id/helping_hand"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="@string/app_name"
+        android:hint="@string/helping_hand"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="31dp"
-        android:textSize="35sp"
-        />
+        android:textSize="33sp" />
+
+    <TextView android:id="@+id/let_us"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="@string/let_us"
+        android:layout_below="@+id/helping_hand"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="20dp"
+        android:textSize="20sp" />
+
+    <Button android:id="@+id/uber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/let_us"
+        android:hint="@string/uber"
+        android:typeface="serif"
+        android:textSize="30sp"/>
+
+    <TextView android:id="@+id/uber_sub"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="@string/uber_sub"
+        android:layout_below="@+id/uber"
+        android:layout_centerHorizontal="true"
+        android:gravity="center_horizontal"
+        android:layout_marginBottom="20dp"
+        android:textSize="15sp" />
+
+    <Button android:id="@+id/phone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/uber_sub"
+        android:hint="@string/phone"
+        android:typeface="serif"
+        android:textSize="30sp"/>
+
+    <TextView android:id="@+id/phone_sub"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="@string/phone_sub"
+        android:layout_below="@+id/phone"
+        android:layout_centerHorizontal="true"
+        android:gravity="center_horizontal"
+        android:layout_marginBottom="20dp"
+        android:textSize="15sp" />
+
+    <Button android:id="@+id/location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/phone_sub"
+        android:hint="@string/location"
+        android:typeface="serif"
+        android:textSize="30sp"/>
+
+    <TextView android:id="@+id/location_sub"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="@string/location_sub"
+        android:layout_below="@+id/location"
+        android:layout_centerHorizontal="true"
+        android:gravity="center_horizontal"
+        android:layout_marginBottom="20dp"
+        android:textSize="15sp" />
+
 </RelativeLayout>

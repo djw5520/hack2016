@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">Safe Streets</string>
+    <string name="helping_hand">Need a helping hand?</string>
+    <string name="let_us">Let us help get you home safely.</string>
+    <string name="uber">Call an Uber</string>
+    <string name="uber_sub">We will automatically call an uber for you and send your location.</string>
+    <string name="phone">Call a Friend</string>
+    <string name="phone_sub">Call a friend from your contacts list to come pick you up.</string>
+    <string name="location">Send Your Location</string>
+    <string name="location_sub">Send your location via Google Maps to a friend so they can easily pick you up.</string>
+
 </resources>
