@@ -8,5 +8,7 @@
     <string name="phone_sub">Call a friend from your contacts list to come pick you up.</string>
     <string name="location">Send Your Location</string>
     <string name="location_sub">Send your location via Google Maps to a friend so they can easily pick you up.</string>
+    <string name="receive">RECEIVE DATA</string>
+    <string name="clear">YOU ARE ALL CLEAR :D</string>
 
 </resources>

@@ -7,6 +7,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@drawable/white_back"
     tools:context="com.example.dwitm.safestreets3.MyActivity">
 
 
@@ -81,7 +82,28 @@
     android:layout_below="@+id/location"
     android:layout_centerHorizontal="true"
     android:gravity="center_horizontal"
-    android:layout_marginBottom="20dp"
+    android:layout_marginBottom="10dp"
     android:textSize="15sp"/>
+
+    <Button android:id="@+id/receive"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/location_sub"
+        android:hint="@string/receive"
+        android:typeface="serif"
+        android:textSize="12sp"/>
+
+    <TextView android:id="@+id/all_clear"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="@string/clear"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:gravity="center_horizontal"
+        android:layout_marginBottom="10dp"
+        android:textSize="55sp"/>
+
+
 
 </RelativeLayout>
