@@ -27,7 +27,6 @@ import com.google.android.gms.location.LocationServices;
 public class MainActivity extends AppCompatActivity implements ConnectionCallbacks, OnConnectionFailedListener {
     private GoogleApiClient mGoogleApiClient;
 
-    final Button button3 = (Button) findViewById(R.id.location);
 
 
     protected static final String TAG = "MainActivity";
@@ -76,7 +75,7 @@ public class MainActivity extends AppCompatActivity implements ConnectionCallbac
     public void sendSMSMessage(){
         try{
             SmsManager smsManager = SmsManager.getDefault();
-            smsManager.sendTextMessage("+14843189828", null, "" + mLatitudeText.toString()+ "," + mLongitudeText.toString() + "", null, null);
+            smsManager.sendTextMessage("+14843189828", null, "Fuck Yeah Mother Fucker", null, null);
             Toast.makeText(getApplicationContext(), "SMS sent", Toast.LENGTH_LONG).show();
         } catch (Exception e){
             Toast.makeText(getApplicationContext(), "SMS failed try again", Toast.LENGTH_LONG).show();
