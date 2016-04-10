@@ -1,5 +1,6 @@
 package com.example.dwitm.safestreets3;
 
+
 import android.Manifest;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
@@ -7,29 +8,22 @@ import android.bluetooth.BluetoothSocket;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Color;
 import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.telephony.SmsManager;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
-import com.google.android.gms.appindexing.Action;
-import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.common.api.GoogleApiClient.ConnectionCallbacks;
-import com.google.android.gms.common.api.GoogleApiClient.OnConnectionFailedListener;
 import com.google.android.gms.location.LocationServices;
 
 import java.io.IOException;
@@ -41,14 +35,24 @@ import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
-public class MyActivity extends AppCompatActivity implements ConnectionCallbacks, OnConnectionFailedListener {
 
-    private static final int REQUEST_ENABLE_BT = 5;
+
+public class MyActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener, GoogleApiClient.ConnectionCallbacks {
+
     private GoogleApiClient mGoogleApiClient;
+<<<<<<< HEAD
     protected Location mLastLocation;
     protected static final String TAG = "MyActivity";
     protected TextView mLatitudeText;
     protected TextView mLongitudeText;
+=======
+    Location mLastLocation;
+    double latitude;
+    double longitude;
+    String googleLink;
+    private static final int REQUEST_ENABLE_BT = 5;
+
+>>>>>>> 49f9c66ab061196ff2a56d1d33b42d928eed8719
 
     public static final UUID MY_UUID = UUID.fromString("00001101-0000-1000-8000-00805f9b34fb");
     //Bluetooth
@@ -75,6 +79,8 @@ public class MyActivity extends AppCompatActivity implements ConnectionCallbacks
         final TextView location_sub = (TextView) findViewById(R.id.location_sub);
         final TextView all_clear = (TextView) findViewById(R.id.all_clear);
 
+
+
         assert location != null;
         location.setVisibility(View.GONE);
         assert phone != null;
@@ -94,10 +100,15 @@ public class MyActivity extends AppCompatActivity implements ConnectionCallbacks
         assert all_clear != null;
         all_clear.setVisibility(View.VISIBLE);
 
+<<<<<<< HEAD
 
 
         // Find Bluetooth adapter
         BluetoothAdapter mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+=======
+        assert receive_data != null;
+        final BluetoothAdapter mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+>>>>>>> 49f9c66ab061196ff2a56d1d33b42d928eed8719
         if (mBluetoothAdapter == null) {
             // Device does not support Bluetooth
             System.out.println("NO BLUETOOTH SUPPORT");
@@ -133,8 +144,12 @@ public class MyActivity extends AppCompatActivity implements ConnectionCallbacks
                     System.out.println(mBluetoothDevice.getAddress());
                     try {
                         // Try to connect to Bluetooth device
+<<<<<<< HEAD
                         mBluetoothSocket =
                                 mBluetoothDevice.createRfcommSocketToServiceRecord(MY_UUID);
+=======
+                        mBluetoothSocket = mBluetoothDevice.createInsecureRfcommSocketToServiceRecord(MY_UUID);
+>>>>>>> 49f9c66ab061196ff2a56d1d33b42d928eed8719
                         mBluetoothSocket.connect();
                         mBluetoothInputStream = mBluetoothSocket.getInputStream();
                     } catch (IOException e) {
@@ -163,15 +178,21 @@ public class MyActivity extends AppCompatActivity implements ConnectionCallbacks
 
         }
 
+<<<<<<< HEAD
 // Handle button click to toggle LED
         // Output input into written thing
         //public class EventListenerActivity implements ActionListener {
         //}
         //}
 
+=======
+>>>>>>> 49f9c66ab061196ff2a56d1d33b42d928eed8719
         receive_data.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                try {
+                    System.out.println(mBluetoothInputStream.read());
 
+                    if (mBluetoothInputStream.read() == 49) {
                         assert location != null;
                         location.setVisibility(View.VISIBLE);
                         assert phone != null;
@@ -190,10 +211,36 @@ public class MyActivity extends AppCompatActivity implements ConnectionCallbacks
                         location_sub.setVisibility(View.VISIBLE);
                         assert all_clear != null;
                         all_clear.setVisibility(View.GONE);
+                    }
+                else
+                    {
+                        assert location != null;
+                        location.setVisibility(View.GONE);
+                        assert phone != null;
+                        phone.setVisibility(View.GONE);
+                        assert uber != null;
+                        uber.setVisibility(View.GONE);
+                        assert helping_hand != null;
+                        helping_hand.setVisibility(View.GONE);
+                        assert let_us != null;
+                        let_us.setVisibility(View.GONE);
+                        assert uber_sub != null;
+                        uber_sub.setVisibility(View.GONE);
+                        assert phone_sub != null;
+                        phone_sub.setVisibility(View.GONE);
+                        assert location_sub != null;
+                        location_sub.setVisibility(View.GONE);
+                        assert all_clear != null;
+                        all_clear.setVisibility(View.VISIBLE);
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
 
             }
         });
 
+<<<<<<< HEAD
         // ATTENTION: This "addApi(AppIndex.API)"was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
 
@@ -203,21 +250,28 @@ public class MyActivity extends AppCompatActivity implements ConnectionCallbacks
                 .addApi(LocationServices.API)
                 .addApi(AppIndex.API).build();
 
+=======
+>>>>>>> 49f9c66ab061196ff2a56d1d33b42d928eed8719
         assert location != null;
         location.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                try {
+                if (mLastLocation != null) {
+                    Toast.makeText(getApplicationContext(),"Go Go Gadget!",Toast.LENGTH_SHORT).show();
+                    latitude = mLastLocation.getLatitude();
+                    longitude = mLastLocation.getLongitude();
+                    try {
+                        googleLink = "Hi, would you be able to drive me home? My location is: "+"http://maps.google.com/maps?f=q&q=("+Double.toString(latitude)+","+Double.toString(longitude)+")";
+                        SmsManager smsManager = SmsManager.getDefault();
+                        smsManager.sendTextMessage("+17172035062", null,googleLink, null, null);
+                        Toast.makeText(getApplicationContext(), "SMS sent", Toast.LENGTH_LONG).show();
 
-                    SmsManager smsManager = SmsManager.getDefault();
-                    smsManager.sendTextMessage("+14843189828", null, "Fuck yeah MOTHERFUCKER", null, null);
-                    Toast.makeText(getApplicationContext(), "SMS sent", Toast.LENGTH_LONG).show();
-
-                } catch (Exception e) {
-                    Toast.makeText(getApplicationContext(), "SMS failed try again", Toast.LENGTH_LONG).show();
-                    e.printStackTrace();
-
+                    } catch (Exception e) {
+                        Toast.makeText(getApplicationContext(), "SMS failed try again", Toast.LENGTH_LONG).show();
+                        e.printStackTrace();
+                    }
                 }
             }
+<<<<<<< HEAD
         }
 );
     }
@@ -235,63 +289,84 @@ public class MyActivity extends AppCompatActivity implements ConnectionCallbacks
             return;
         }
         mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
+=======
+        });
+>>>>>>> 49f9c66ab061196ff2a56d1d33b42d928eed8719
 
-            if (mLastLocation != null) {
-                mLatitudeText.setText(String.valueOf(mLastLocation.getLatitude()));
-                mLongitudeText.setText(String.valueOf(mLastLocation.getLongitude()));
+        assert phone != null;
+        phone.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent callIntent = new Intent(Intent.ACTION_CALL);
+                callIntent.setData(Uri.parse("tel:4843189828"));
+                try{
+                    startActivity(callIntent);
+                }
+                catch (android.content.ActivityNotFoundException ex){
+                    Toast.makeText(getApplicationContext(),"yourActivity is not founded",Toast.LENGTH_SHORT).show();
+                }
             }
+        });
+
+        // Create an instance of GoogleAPIClient.
+        if (mGoogleApiClient == null) {
+            mGoogleApiClient = new GoogleApiClient.Builder(this)
+                    .addConnectionCallbacks(this)
+                    .addOnConnectionFailedListener(this)
+                    .addApi(LocationServices.API)
+                    .build();
+        }
+    }
+
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+        Toast.makeText(getApplicationContext(),"Connection Failed",Toast.LENGTH_SHORT).show();
+        mGoogleApiClient.connect();
+    }
+    protected void onStart() {
+        mGoogleApiClient.connect();
+        super.onStart();
+    }
+
+    protected void onStop() {
+        mGoogleApiClient.disconnect();
+        super.onStop();
+    }
+    @Override
+    public void onConnected(Bundle connectionHint) {
+        mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
+        if (ContextCompat.checkSelfPermission(this,Manifest.permission.ACCESS_FINE_LOCATION)!= PackageManager.PERMISSION_GRANTED) {
+            // Should we show an explanation?
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_FINE_LOCATION)) {
+
+                // Show an expanation to the user *asynchronously* -- don't block
+                // this thread waiting for the user's response! After the user
+                // sees the explanation, try again to request the permission.
+
+            } else {
+
+                // No explanation needed, we can request the permission.
+
+                //ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.READ_CONTACTS}, MY_PERMISSIONS_REQUEST_READ_CONTACTS);
+                Toast.makeText(getApplicationContext(),"permission denied",Toast.LENGTH_SHORT).show();
+
+                // MY_PERMISSIONS_REQUEST_READ_CONTACTS is an
+                // app-defined int constant. The callback method gets the
+                // result of the request.
+            }
+        }
 
     }
 
     @Override
     public void onConnectionSuspended(int i) {
-        Log.i(TAG, "Connection suspended");
+        Toast.makeText(getApplicationContext(),"Connection Suspended",Toast.LENGTH_SHORT).show();
         mGoogleApiClient.connect();
     }
 
-    @Override
-    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-        Log.i(TAG, "Connection failed: ConnectionResult.getErrorCode() = " + connectionResult.getErrorCode());
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        mGoogleApiClient.connect();
-        Action viewAction = Action.newAction(
-                Action.TYPE_VIEW, // TODO: choose an action type.
-                "My Page", // TODO: Define a title for the content shown.
-                // TODO: If you have web page content that matches this app activity's content,
-                // make sure this auto-generated web page URL is correct.
-                // Otherwise, set the URL to null.
-                Uri.parse("http://host/path"),
-                // TODO: Make sure this auto-generated app URL is correct.
-                Uri.parse("android-app://com.example.dwitm.safestreets3/http/host/path")
-        );
-        AppIndex.AppIndexApi.start(mGoogleApiClient, viewAction);
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        Action viewAction = Action.newAction(
-                Action.TYPE_VIEW, // TODO: choose an action type.
-                "My Page", // TODO: Define a title for the content shown.
-                // TODO: If you have web page content that matches this app activity's content,
-                // make sure this auto-generated web page URL is correct.
-                // Otherwise, set the URL to null.
-                Uri.parse("http://host/path"),
-                // TODO: Make sure this auto-generated app URL is correct.
-                Uri.parse("android-app://com.example.dwitm.safestreets3/http/host/path")
-        );
-        AppIndex.AppIndexApi.end(mGoogleApiClient, viewAction);
-        mGoogleApiClient.disconnect();
-    }
-
+//    protected void createLocationRequest() {
+//        LocationRequest mLocationRequest = new LocationRequest();
+//        mLocationRequest.setInterval(10000);
+//        mLocationRequest.setFastestInterval(5000);
+//        mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+//    }
 }

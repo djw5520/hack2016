@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:uber="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -36,7 +37,7 @@
     android:layout_centerHorizontal="true"
     android:layout_below="@+id/let_us"
     android:hint="@string/uber"
-        android:typeface="normal"
+    android:typeface="normal"
     android:padding="10dp"
     android:textSize="20sp"/>
 
