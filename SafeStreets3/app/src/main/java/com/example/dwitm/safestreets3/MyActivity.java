@@ -58,6 +58,7 @@ public class MyActivity extends AppCompatActivity implements ConnectionCallbacks
     private InputStream mBluetoothInputStream;
     private Set<BluetoothDevice> pairedDevices;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -134,6 +135,7 @@ public class MyActivity extends AppCompatActivity implements ConnectionCallbacks
                         mBluetoothSocket =
                                 mBluetoothDevice.createInsecureRfcommSocketToServiceRecord(MY_UUID);
                         mBluetoothSocket.connect();
+                        System.out.printf("%d", mBluetoothSocket.TYPE_RFCOMM);
                         mBluetoothInputStream = mBluetoothSocket.getInputStream();
                     } catch (IOException e) {
                         try {
