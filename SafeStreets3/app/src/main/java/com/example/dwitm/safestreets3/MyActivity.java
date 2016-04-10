@@ -40,19 +40,12 @@ import java.util.UUID;
 public class MyActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener, GoogleApiClient.ConnectionCallbacks {
 
     private GoogleApiClient mGoogleApiClient;
-<<<<<<< HEAD
-    protected Location mLastLocation;
-    protected static final String TAG = "MyActivity";
-    protected TextView mLatitudeText;
-    protected TextView mLongitudeText;
-=======
     Location mLastLocation;
     double latitude;
     double longitude;
     String googleLink;
     private static final int REQUEST_ENABLE_BT = 5;
 
->>>>>>> 49f9c66ab061196ff2a56d1d33b42d928eed8719
 
     public static final UUID MY_UUID = UUID.fromString("00001101-0000-1000-8000-00805f9b34fb");
     //Bluetooth
@@ -100,15 +93,8 @@ public class MyActivity extends AppCompatActivity implements GoogleApiClient.OnC
         assert all_clear != null;
         all_clear.setVisibility(View.VISIBLE);
 
-<<<<<<< HEAD
-
-
-        // Find Bluetooth adapter
-        BluetoothAdapter mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-=======
         assert receive_data != null;
         final BluetoothAdapter mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
->>>>>>> 49f9c66ab061196ff2a56d1d33b42d928eed8719
         if (mBluetoothAdapter == null) {
             // Device does not support Bluetooth
             System.out.println("NO BLUETOOTH SUPPORT");
@@ -144,13 +130,9 @@ public class MyActivity extends AppCompatActivity implements GoogleApiClient.OnC
                     System.out.println(mBluetoothDevice.getAddress());
                     try {
                         // Try to connect to Bluetooth device
-<<<<<<< HEAD
-                        mBluetoothSocket =
-                                mBluetoothDevice.createRfcommSocketToServiceRecord(MY_UUID);
-=======
                         mBluetoothSocket = mBluetoothDevice.createInsecureRfcommSocketToServiceRecord(MY_UUID);
->>>>>>> 49f9c66ab061196ff2a56d1d33b42d928eed8719
                         mBluetoothSocket.connect();
+                        System.out.printf("%d", mBluetoothSocket.TYPE_RFCOMM);
                         mBluetoothInputStream = mBluetoothSocket.getInputStream();
                     } catch (IOException e) {
                         try {
@@ -178,21 +160,12 @@ public class MyActivity extends AppCompatActivity implements GoogleApiClient.OnC
 
         }
 
-<<<<<<< HEAD
-// Handle button click to toggle LED
-        // Output input into written thing
-        //public class EventListenerActivity implements ActionListener {
-        //}
-        //}
-
-=======
->>>>>>> 49f9c66ab061196ff2a56d1d33b42d928eed8719
-        receive_data.setOnClickListener(new View.OnClickListener() {
+        /*receive_data.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 try {
                     System.out.println(mBluetoothInputStream.read());
 
-                    if (mBluetoothInputStream.read() == 49) {
+                    if (mBluetoothInputStream.read() == 49) {*/
                         assert location != null;
                         location.setVisibility(View.VISIBLE);
                         assert phone != null;
@@ -211,7 +184,7 @@ public class MyActivity extends AppCompatActivity implements GoogleApiClient.OnC
                         location_sub.setVisibility(View.VISIBLE);
                         assert all_clear != null;
                         all_clear.setVisibility(View.GONE);
-                    }
+                   /* }
                 else
                     {
                         assert location != null;
@@ -238,20 +211,8 @@ public class MyActivity extends AppCompatActivity implements GoogleApiClient.OnC
                 }
 
             }
-        });
+        });*/
 
-<<<<<<< HEAD
-        // ATTENTION: This "addApi(AppIndex.API)"was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-
-        mGoogleApiClient = new GoogleApiClient.Builder(this)
-                .addConnectionCallbacks(this)
-                .addOnConnectionFailedListener(this)
-                .addApi(LocationServices.API)
-                .addApi(AppIndex.API).build();
-
-=======
->>>>>>> 49f9c66ab061196ff2a56d1d33b42d928eed8719
         assert location != null;
         location.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -271,27 +232,7 @@ public class MyActivity extends AppCompatActivity implements GoogleApiClient.OnC
                     }
                 }
             }
-<<<<<<< HEAD
-        }
-);
-    }
-
-    @Override
-    public void onConnected(@Nullable Bundle bundle) {
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
-            return;
-        }
-        mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
-=======
         });
->>>>>>> 49f9c66ab061196ff2a56d1d33b42d928eed8719
 
         assert phone != null;
         phone.setOnClickListener(new View.OnClickListener() {
