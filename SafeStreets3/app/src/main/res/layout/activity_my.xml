@@ -29,13 +29,16 @@
     android:textSize="20sp"/>
 
     <Button android:id="@+id/uber"
+    android:background="#6666ff"
+    android:textColor="#ffffff"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_centerHorizontal="true"
     android:layout_below="@+id/let_us"
     android:hint="@string/uber"
-    android:typeface="serif"
-    android:textSize="30sp"/>
+        android:typeface="normal"
+    android:padding="10dp"
+    android:textSize="20sp"/>
 
     <TextView android:id="@+id/uber_sub"
     android:layout_width="wrap_content"
@@ -48,13 +51,17 @@
     android:textSize="15sp"/>
 
     <Button android:id="@+id/phone"
+        android:background="#6666ff"
+        android:textColor="#ffffff"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_centerHorizontal="true"
     android:layout_below="@+id/uber_sub"
     android:hint="@string/phone"
-    android:typeface="serif"
-    android:textSize="30sp"/>
+        android:typeface="normal"
+        android:padding="10dp"
+
+        android:textSize="20sp"/>
 
     <TextView android:id="@+id/phone_sub"
     android:layout_width="wrap_content"
@@ -67,13 +74,17 @@
     android:textSize="15sp"/>
 
     <Button android:id="@+id/location"
+        android:background="#6666ff"
+        android:textColor="#ffffff"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_centerHorizontal="true"
     android:layout_below="@+id/phone_sub"
     android:hint="@string/location"
-    android:typeface="serif"
-    android:textSize="30sp"/>
+    android:typeface="normal"
+        android:padding="10dp"
+
+        android:textSize="20sp"/>
 
     <TextView android:id="@+id/location_sub"
     android:layout_width="wrap_content"

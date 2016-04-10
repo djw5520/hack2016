@@ -168,28 +168,7 @@ public class MyActivity extends AppCompatActivity implements ConnectionCallbacks
         //}
         receive_data.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                try {
-                    if (mBluetoothInputStream.read() == 0) {
-                        assert location != null;
-                        location.setVisibility(View.GONE);
-                        assert phone != null;
-                        phone.setVisibility(View.GONE);
-                        assert uber != null;
-                        uber.setVisibility(View.GONE);
-                        assert helping_hand != null;
-                        helping_hand.setVisibility(View.GONE);
-                        assert let_us != null;
-                        let_us.setVisibility(View.GONE);
-                        assert uber_sub != null;
-                        uber_sub.setVisibility(View.GONE);
-                        assert phone_sub != null;
-                        phone_sub.setVisibility(View.GONE);
-                        assert location_sub != null;
-                        location_sub.setVisibility(View.GONE);
-                        assert all_clear != null;
-                        all_clear.setVisibility(View.VISIBLE);
 
-                    } else {
                         assert location != null;
                         location.setVisibility(View.VISIBLE);
                         assert phone != null;
@@ -208,10 +187,7 @@ public class MyActivity extends AppCompatActivity implements ConnectionCallbacks
                         location_sub.setVisibility(View.VISIBLE);
                         assert all_clear != null;
                         all_clear.setVisibility(View.GONE);
-                    }
-                } catch (IOException e1) {
-                    e1.printStackTrace();
-                }
+
             }
         });
 
