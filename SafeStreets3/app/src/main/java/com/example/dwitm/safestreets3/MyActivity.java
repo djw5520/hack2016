@@ -46,7 +46,7 @@ public class MyActivity extends AppCompatActivity implements ConnectionCallbacks
     private static final int REQUEST_ENABLE_BT = 5;
     private GoogleApiClient mGoogleApiClient;
     protected Location mLastLocation;
-    protected static final String TAG = "MainActivity";
+    protected static final String TAG = "MyActivity";
     protected TextView mLatitudeText;
     protected TextView mLongitudeText;
 
@@ -95,6 +95,7 @@ public class MyActivity extends AppCompatActivity implements ConnectionCallbacks
         all_clear.setVisibility(View.VISIBLE);
 
 
+
         // Find Bluetooth adapter
         BluetoothAdapter mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         if (mBluetoothAdapter == null) {
@@ -133,9 +134,8 @@ public class MyActivity extends AppCompatActivity implements ConnectionCallbacks
                     try {
                         // Try to connect to Bluetooth device
                         mBluetoothSocket =
-                                mBluetoothDevice.createInsecureRfcommSocketToServiceRecord(MY_UUID);
+                                mBluetoothDevice.createRfcommSocketToServiceRecord(MY_UUID);
                         mBluetoothSocket.connect();
-                        System.out.printf("%d", mBluetoothSocket.TYPE_RFCOMM);
                         mBluetoothInputStream = mBluetoothSocket.getInputStream();
                     } catch (IOException e) {
                         try {
@@ -168,6 +168,7 @@ public class MyActivity extends AppCompatActivity implements ConnectionCallbacks
         //public class EventListenerActivity implements ActionListener {
         //}
         //}
+
         receive_data.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
@@ -195,6 +196,7 @@ public class MyActivity extends AppCompatActivity implements ConnectionCallbacks
 
         // ATTENTION: This "addApi(AppIndex.API)"was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
+
         mGoogleApiClient = new GoogleApiClient.Builder(this)
                 .addConnectionCallbacks(this)
                 .addOnConnectionFailedListener(this)
@@ -216,7 +218,8 @@ public class MyActivity extends AppCompatActivity implements ConnectionCallbacks
 
                 }
             }
-        });
+        }
+);
     }
 
     @Override
