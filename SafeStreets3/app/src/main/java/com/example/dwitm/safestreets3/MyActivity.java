@@ -2,14 +2,17 @@ package com.example.dwitm.safestreets3;
 
 
 import android.Manifest;
+import android.annotation.TargetApi;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
+import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
@@ -22,6 +25,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.appindexing.Action;
+import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationServices;
@@ -73,7 +78,6 @@ public class MyActivity extends AppCompatActivity implements GoogleApiClient.OnC
         final TextView all_clear = (TextView) findViewById(R.id.all_clear);
 
 
-
         assert location != null;
         location.setVisibility(View.GONE);
         assert phone != null;
@@ -110,7 +114,7 @@ public class MyActivity extends AppCompatActivity implements GoogleApiClient.OnC
         pairedDevices = mBluetoothAdapter.getBondedDevices();
         // If there are paired devices
         if (pairedDevices.size() > 0) {
-            List<String> pairedDeviceList = new ArrayList<String>();
+            List<String> pairedDeviceList = new ArrayList<>();
             // Loop through paired devices
             for (BluetoothDevice device : pairedDevices) {
                 // Add the name and address to an array adapter to show in the alert dialog
@@ -123,6 +127,7 @@ public class MyActivity extends AppCompatActivity implements GoogleApiClient.OnC
             builder.setItems(pairedDeviceList.toArray(new
                     CharSequence[pairedDeviceList.size()]), new DialogInterface.OnClickListener() {
 
+                @TargetApi(Build.VERSION_CODES.M)
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     // Get selected paired Bluetooth device
@@ -132,7 +137,7 @@ public class MyActivity extends AppCompatActivity implements GoogleApiClient.OnC
                         // Try to connect to Bluetooth device
                         mBluetoothSocket = mBluetoothDevice.createInsecureRfcommSocketToServiceRecord(MY_UUID);
                         mBluetoothSocket.connect();
-                        System.out.printf("%d", mBluetoothSocket.TYPE_RFCOMM);
+                        System.out.printf("%d", BluetoothSocket.TYPE_RFCOMM);
                         mBluetoothInputStream = mBluetoothSocket.getInputStream();
                     } catch (IOException e) {
                         try {
@@ -160,70 +165,52 @@ public class MyActivity extends AppCompatActivity implements GoogleApiClient.OnC
 
         }
 
-        /*receive_data.setOnClickListener(new View.OnClickListener() {
+        receive_data.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 try {
-                    System.out.println(mBluetoothInputStream.read());
+                    int value = mBluetoothInputStream.read();
+                    System.out.println(value);
 
-                    if (mBluetoothInputStream.read() == 49) {*/
-                        assert location != null;
+                    if (value >= 49) {
                         location.setVisibility(View.VISIBLE);
-                        assert phone != null;
                         phone.setVisibility(View.VISIBLE);
-                        assert uber != null;
                         uber.setVisibility(View.VISIBLE);
-                        assert helping_hand != null;
                         helping_hand.setVisibility(View.VISIBLE);
-                        assert let_us != null;
                         let_us.setVisibility(View.VISIBLE);
-                        assert uber_sub != null;
                         uber_sub.setVisibility(View.VISIBLE);
-                        assert phone_sub != null;
                         phone_sub.setVisibility(View.VISIBLE);
-                        assert location_sub != null;
                         location_sub.setVisibility(View.VISIBLE);
-                        assert all_clear != null;
                         all_clear.setVisibility(View.GONE);
-                   /* }
-                else
-                    {
-                        assert location != null;
+                    }
+                    else {
                         location.setVisibility(View.GONE);
-                        assert phone != null;
                         phone.setVisibility(View.GONE);
-                        assert uber != null;
                         uber.setVisibility(View.GONE);
-                        assert helping_hand != null;
                         helping_hand.setVisibility(View.GONE);
-                        assert let_us != null;
                         let_us.setVisibility(View.GONE);
-                        assert uber_sub != null;
                         uber_sub.setVisibility(View.GONE);
-                        assert phone_sub != null;
                         phone_sub.setVisibility(View.GONE);
-                        assert location_sub != null;
                         location_sub.setVisibility(View.GONE);
-                        assert all_clear != null;
                         all_clear.setVisibility(View.VISIBLE);
                     }
                 } catch (IOException e) {
+                    System.out.println("Fail");
                     e.printStackTrace();
                 }
 
             }
-        });*/
+        });
 
-        assert location != null;
         location.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 if (mLastLocation != null) {
-                    Toast.makeText(getApplicationContext(),"Go Go Gadget!",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Go Go Gadget!", Toast.LENGTH_SHORT).show();
                     latitude = mLastLocation.getLatitude();
                     longitude = mLastLocation.getLongitude();
                     try {
-                        googleLink = "Hi, would you be able to drive me home? My location is: "+"http://maps.google.com/maps?f=q&q=("+Double.toString(latitude)+","+Double.toString(longitude)+")";
+                        googleLink = "Hi, would you be able to drive me home? My location is: " + "http://maps.google.com/maps?f=q&q=(" + Double.toString(latitude) + "," + Double.toString(longitude) + ")";
                         SmsManager smsManager = SmsManager.getDefault();
-                        smsManager.sendTextMessage("+17172035062", null,googleLink, null, null);
+                        smsManager.sendTextMessage("+17172035062", null, googleLink, null, null);
                         Toast.makeText(getApplicationContext(), "SMS sent", Toast.LENGTH_LONG).show();
 
                     } catch (Exception e) {
@@ -234,27 +221,27 @@ public class MyActivity extends AppCompatActivity implements GoogleApiClient.OnC
             }
         });
 
-        assert phone != null;
         phone.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent callIntent = new Intent(Intent.ACTION_CALL);
                 callIntent.setData(Uri.parse("tel:4843189828"));
-                try{
+                try {
                     startActivity(callIntent);
-                }
-                catch (android.content.ActivityNotFoundException ex){
-                    Toast.makeText(getApplicationContext(),"yourActivity is not founded",Toast.LENGTH_SHORT).show();
+                } catch (ActivityNotFoundException ex) {
+                    Toast.makeText(getApplicationContext(), "yourActivity is not founded", Toast.LENGTH_SHORT).show();
                 }
             }
         });
 
         // Create an instance of GoogleAPIClient.
         if (mGoogleApiClient == null) {
+            // ATTENTION: This "addApi(AppIndex.API)"was auto-generated to implement the App Indexing API.
+            // See https://g.co/AppIndexing/AndroidStudio for more information.
             mGoogleApiClient = new GoogleApiClient.Builder(this)
                     .addConnectionCallbacks(this)
                     .addOnConnectionFailedListener(this)
                     .addApi(LocationServices.API)
-                    .build();
+                    .addApi(AppIndex.API).build();
         }
     }
 
@@ -266,11 +253,37 @@ public class MyActivity extends AppCompatActivity implements GoogleApiClient.OnC
     protected void onStart() {
         mGoogleApiClient.connect();
         super.onStart();
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        Action viewAction = Action.newAction(
+                Action.TYPE_VIEW, // TODO: choose an action type.
+                "My Page", // TODO: Define a title for the content shown.
+                // TODO: If you have web page content that matches this app activity's content,
+                // make sure this auto-generated web page URL is correct.
+                // Otherwise, set the URL to null.
+                Uri.parse("http://host/path"),
+                // TODO: Make sure this auto-generated app URL is correct.
+                Uri.parse("android-app://com.example.dwitm.safestreets3/http/host/path")
+        );
+        AppIndex.AppIndexApi.start(mGoogleApiClient, viewAction);
     }
 
     protected void onStop() {
         mGoogleApiClient.disconnect();
         super.onStop();
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        Action viewAction = Action.newAction(
+                Action.TYPE_VIEW, // TODO: choose an action type.
+                "My Page", // TODO: Define a title for the content shown.
+                // TODO: If you have web page content that matches this app activity's content,
+                // make sure this auto-generated web page URL is correct.
+                // Otherwise, set the URL to null.
+                Uri.parse("http://host/path"),
+                // TODO: Make sure this auto-generated app URL is correct.
+                Uri.parse("android-app://com.example.dwitm.safestreets3/http/host/path")
+        );
+        AppIndex.AppIndexApi.end(mGoogleApiClient, viewAction);
     }
     @Override
     public void onConnected(Bundle connectionHint) {
